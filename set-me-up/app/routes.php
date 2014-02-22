@@ -7,3 +7,5 @@ Route::get('/twitter/username/availability/{username}', 'TwitterControllerHandle
 Route::get('/facebook/username/availability/{username}', 'FacebookControllerHandler@checkAvailability');
 Route::get('/linkedin/username/availability/{username}', 'LinkedInControllerHandler@checkAvailability');
 Route::get('/instagram/username/availability/{username}', 'InstagramControllerHandler@checkAvailability');
+
+Route::post('/facebook/automateInput/', 'FacebookControllerHandler@automateInput');
