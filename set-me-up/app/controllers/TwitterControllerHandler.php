@@ -2,13 +2,18 @@
 
 class TwitterControllerHandler extends BaseController {
 
-
 	public function checkAvailability($username)
 	{
         $user = Twitter::getUsers(array(
             'screen_name' => $username
         ));
-        print_r($user);
+        //print_r($user);
+        
+        if(isset($user->errors)) {
+        	return Response::json(array('exists' => false),200);
+        } else {
+        	return Response::json(array('exists' => true),200);
+        }
 	}
 
 	public function checkAvailabilitySelenium($username)

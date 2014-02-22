@@ -2,7 +2,26 @@
 
 class LinkedInControllerHandler extends BaseController {
 
+
 	public function checkAvailability($username)
+	{
+		$host = 'http://localhost:4444/wd/hub'; // this is the default
+		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
+		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
+		$driver = RemoteWebDriver::create($host, $capabilities, 5000);		
+		
+		// get webdriver
+		$driver->get('http://www.linkedin.com/in/' . $username);
+
+		try {
+			return Response::json(array('exists' => true),200);
+		} catch(Exception $e) {
+			return Response::json(array('exists' => false),200);
+		}
+	}
+
+
+	public function checkAvailabilitySelenium($username)
 	{
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');

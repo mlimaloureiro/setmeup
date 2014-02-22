@@ -36,7 +36,7 @@
    
     <section class="colorBg1 colorBg" id="demo1" data-panel="second">
 
-        <div class=" container">
+        <div class="container">
 
             <div class="login-form-section">
                 <div class="login-content " data-animation="bounceIn">
@@ -44,15 +44,16 @@
                         <div class="section-title">
                             <h3>Start by choosing your username, we'll check the availability for you.</h3>
                         </div>
+                        
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                <input type="text" required="required" class="form-control" placeholder="Type your awesome username here" />
+                                <input type="text" required="required" id="username_input" class="form-control" placeholder="Type your awesome username here" />
                             </div>
                         </div>
                         
                         <div class="login-form-action clearfix">
-                            <button type="submit" class="btn btn-success pull-right green-btn">Check &nbsp; <i class="icon-chevron-right"></i></button>
+                            <button type="submit" id="submit_check_availability" class="btn btn-success pull-right green-btn">Check &nbsp; <i class="icon-chevron-right"></i></button>
                         </div>
                     </form>
                 </div>
@@ -387,6 +388,7 @@
     <script src="js/template/waypoints.min.js"></script>
     <script src="js/libs/jquery.panelSnap.js"></script>
     <script src="js/app/init.js"></script>
+    <script src="js/app/app.js"></script>
 
 </body>
 </html>

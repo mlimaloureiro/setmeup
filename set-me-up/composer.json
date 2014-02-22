@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"facebook/webdriver" : "dev-master",
-		"thujohn/twitter": "dev-master"
+		"thujohn/twitter": "dev-master",
+		"facebook/php-sdk": "@stable"
 	},
 	"autoload": {
 		"classmap": [

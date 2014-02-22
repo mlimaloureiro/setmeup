@@ -2,7 +2,28 @@
 
 class FacebookControllerHandler extends BaseController {
 
+
+	private $facebook = null;
+
+	public function __construct()
+	{
+		$this->facebook = new Facebook(array(
+		  'appId'  => '401612286642521',
+		  'secret' => '4fc702be0b5ef42e8d620245d15c8ec1',
+		));
+	}
+
 	public function checkAvailability($username)
+	{
+		try {
+			//print_r($this->facebook->api($username));
+			return Response::json(array('exists' => true),200);
+		} catch(Exception $e) {
+			return Response::json(array('exists' => false),200);
+		}
+	}
+
+	public function checkAvailabilitySelenium($username)
 	{
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
