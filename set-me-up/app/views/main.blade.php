@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="css/preview.css" rel="stylesheet" />
+    <link href="css/setmeup.css" rel="stylesheet" />
     <script src="js/libs/modernizr.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
@@ -44,11 +45,71 @@
                         <div class="section-title">
                             <h3>Start by choosing your username, we'll check the availability for you.</h3>
                         </div>
-                        
+
                         <div class="textbox-wrap">
                             <div class="input-group">
                                 <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
                                 <input type="text" required="required" id="username_input" class="form-control" placeholder="Type your awesome username here" />
+                            </div>
+                        </div>
+
+                        <div class="results-availability">
+
+
+                            <!-- jeesus, need to change this on js -->
+                            <div class="twitter-checking" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #eae560; background-color:#f9f7d1; color:#f6ae38;'>
+                                    <img style="width:24px" src="img/icons/twitter.png" /> checking ... <img src="img/icons/ajax-loader.gif" style="width:24px">
+                                </div>
+                            </div>
+
+                            <div class="twitter-positive" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #2ecc71; background-color:#dcffeb;color:#2ecc71;'>
+                                    <img style="width:24px" src="img/icons/twitter.png" /> is available
+                                </div>
+                            </div>
+
+                            <div class="twitter-negative" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #be1c1c; background-color:#f2bcbc;color:#be1c1c;'>
+                                    <img style="width:24px" src="img/icons/twitter.png" /> is not available
+                                </div>
+                            </div>
+
+                            <div class="facebook-checking" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #eae560; background-color:#f9f7d1;color:#f6ae38;'>
+                                    <img style="width:24px" src="img/icons/facebook.png" /> checking ... <img src="img/icons/ajax-loader.gif" style="width:24px">
+                                </div>
+                            </div>
+
+                            <div class="facebook-positive" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #2ecc71; background-color:#dcffeb;color:#2ecc71;'>
+                                    <img style="width:24px" src="img/icons/facebook.png" /> is available
+                                </div>
+                            </div>
+
+                            <div class="facebook-negative" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #be1c1c; background-color:#f2bcbc;color:#be1c1c;'>
+                                    <img style="width:24px" src="img/icons/facebook.png" /> is not available
+                                </div>
+                            </div>
+
+
+                            <div class="linkedin-checking" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #eae560; background-color:#f9f7d1;color:#f6ae38;'>
+                                    <img style="width:24px" src="img/icons/linkedin.png" /> checking ... <img src="img/icons/ajax-loader.gif" style="width:24px">
+                                </div>
+                            </div>
+
+                            <div class="linkedin-positive" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #2ecc71; background-color:#dcffeb;color:#2ecc71;'>
+                                    <img style="width:24px" src="img/icons/linkedin.png" /> is available
+                                </div>
+                            </div>
+
+                            <div class="linkedin-negative" style="display:none;">
+                                <div class="textbox-wrap" style='border-left:5px solid #be1c1c; background-color:#f2bcbc;color:#be1c1c;'>
+                                    <img style="width:24px" src="img/icons/linkedin.png" /> is not available
+                                </div>
                             </div>
                         </div>
                         
