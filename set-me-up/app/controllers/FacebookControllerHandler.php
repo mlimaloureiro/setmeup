@@ -15,7 +15,7 @@ class FacebookControllerHandler extends BaseController {
 	public function checkAvailability($username)
 	{
 		try {
-			//print_r($this->facebook->api($username));
+			$this->facebook->api($username);
 			return Response::json(array('exists' => true),200);
 		} catch(Exception $e) {
 			return Response::json(array('exists' => false),200);
@@ -26,7 +26,7 @@ class FacebookControllerHandler extends BaseController {
 	{
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
-		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
+		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
 		$driver = RemoteWebDriver::create($host, $capabilities, 5000);		
 		
 		// get webdriver
