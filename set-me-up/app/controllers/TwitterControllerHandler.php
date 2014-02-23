@@ -41,8 +41,7 @@ class TwitterControllerHandler extends BaseController {
 		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
 		$driver = RemoteWebDriver::create($host, $capabilities, 5000);		
 		
-		/*
-		// get webdriver
+		// open twitter signup page
 		$driver->get('https://twitter.com/signup');
 
 		$firstName = Input::get('first_name');
@@ -59,7 +58,6 @@ class TwitterControllerHandler extends BaseController {
 		$website = Input::get('website');
 
 		$nameInput = $driver->findElement(WebDriverBy::cssSelector("input[name='user[name]']"));
-		//$name->sendKeys($firstName + ' ' + $lastName); 
 		$nameInput->sendKeys($firstName . ' ' . $lastName); 
 		
 		$emailInput = $driver->findElement(WebDriverBy::cssSelector("input[name='user[email]']"));
@@ -71,21 +69,36 @@ class TwitterControllerHandler extends BaseController {
 		$usernameInput = $driver->findElement(WebDriverBy::cssSelector("input[name='user[screen_name]']"));
 		$usernameInput->sendKeys($username); 
 
-		$driver->findElement(WebDriverBy::cssSelector("input[name='submit_button']"))->click();
+		/* wait till we have an username ok */
+		$driver->wait(80, 300)->until(function ($driver) {
+			try {
+				$container = $driver->findElement(WebDriverBy::cssSelector("DIV.prompt.username"));
+				$container->findElement(WebDriverBy::cssSelector("P.ok.isaok.active"));
+				return True;
+			} catch(Exception $e) {
+				;
+			}
+		});
+
+		$driver->findElement(WebDriverBy::cssSelector("INPUT.submit.button.promotional"))->click();
 
 		$driver->wait(80, 500)->until(function ($driver) {
 			return $driver->getCurrentURL() != 'https://twitter.com/signup';
 		});
-		*/
-	
+		
+		/*
+		// LOGIN
 		$driver->get('https://twitter.com/');
+
 		$emailInput = $driver->findElement(WebDriverBy::id('signin-email'));
 		$emailInput->sendKeys('ana_cunha@mail.com');
 
 		$passwordInput = $driver->findElement(WebDriverBy::id('signin-password'));
 		$passwordInput->sendKeys('nova_p4ss');
+
 		$driver->findElement(WebDriverBy::cssSelector('BUTTON.submit.btn.primary-btn.flex-table-btn.js-submit'))->click();
 		
+		// wait till theres no submit button 
 		$driver->wait(80, 500)->until(function ($driver) {	
 			try 
 			{
@@ -94,16 +107,18 @@ class TwitterControllerHandler extends BaseController {
 				return true;
 			}	
 		});
+		*/
 
+		/* goes to profile settings */
 		$driver->get('https://twitter.com/settings/profile');
 		
+		/* upload profile image */
 		$driver->findElement(WebDriverBy::id("profile_image_upload"))->click();
 		$inputFile = $driver->findElement(WebDriverBy::cssSelector("INPUT.file-input"));
 		$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/me.png');
 		
 		$driver->findElement(WebDriverBy::cssSelector("BUTTON.btn.primary-btn.profile-image-save"))->click();
 		
-	
 		/* test untill popup submit button disappears which means we have uploaded the picture*/ 
 		
 		$driver->wait(80, 500)->until(function ($driver) {	
@@ -111,14 +126,15 @@ class TwitterControllerHandler extends BaseController {
 			{
 				$driver->findElement(WebDriverBy::cssSelector("BUTTON.btn.primary-btn.profile-image-save"))->click();
 			} catch(Exception $e) {
+				// when we can no longer click the button it 
+				// means the modal is closed
 				return true;
 			}
 		});
 
-		
-
-		$inputCapaFile = $driver->findElement(WebDriverBy::cssSelector("input[name='user[profile_header_image]'].file-input"));
-		$inputCapaFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/capa.png');
+		/* insert cover picture */ 
+		$inputCoverFile = $driver->findElement(WebDriverBy::cssSelector("input[name='user[profile_header_image]'].file-input"));
+		$inputCoverFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/capa.png');
 		
 		$headerContainer = $driver->findElement(WebDriverBy::id("header_image_upload_dialog"));
 		$headerContainer->findElement(WebDriverBy::cssSelector("BUTTON.btn.primary-btn.profile-image-save"))->click();			
