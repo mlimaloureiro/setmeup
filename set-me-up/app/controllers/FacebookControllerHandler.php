@@ -26,7 +26,7 @@ class FacebookControllerHandler extends BaseController {
 	{
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
-		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
+		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
 		$driver = RemoteWebDriver::create($host, $capabilities, 5000);		
 		
 		// get webdriver
@@ -34,9 +34,9 @@ class FacebookControllerHandler extends BaseController {
 
 		try {
 			$driver->findElement(WebDriverBy::cssSelector('#mainContainer'));
-			echo "exists";
+			return Response::json(array('exists' => true),200);
 		} catch(NoSuchElementException $e) {
-			echo "does not exist";
+			return Response::json(array('exists' => false),200);
 		}
 	}
 

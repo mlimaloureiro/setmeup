@@ -93,7 +93,7 @@
                                 </div>
                             </div>
 
-
+                            <!--
                             <div class="linkedin-checking" style="display:none;">
                                 <div class="textbox-wrap" style='border-left:5px solid #eae560; background-color:#f9f7d1;color:#f6ae38;'>
                                     <img style="width:24px" src="img/icons/linkedin.png" /> checking ... <img src="img/icons/ajax-loader.gif" style="width:24px">
@@ -111,6 +111,7 @@
                                     <img style="width:24px" src="img/icons/linkedin.png" /> is not available
                                 </div>
                             </div>
+                            -->
                         </div>
                         
                         <div class="login-form-action clearfix">

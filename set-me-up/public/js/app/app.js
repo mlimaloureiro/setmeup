@@ -30,13 +30,13 @@ window.setMeUp = {
         
         $('.facebook-positive').hide();
         $('.twitter-positive').hide();
-        $('.linkedin-positive').hide();
+        //$('.linkedin-positive').hide();
         $('.facebook-negative').hide();
         $('.twitter-negative').hide();
-        $('.linkedin-negative').hide();
+        //$('.linkedin-negative').hide();
         $('.facebook-checking').show();
         $('.twitter-checking').show();
-        $('.linkedin-checking').show();
+        //$('.linkedin-checking').show();
 
         $.get(twitterEndPoint + 'username/availability/' + username, function(data) {
             $('.twitter-checking').hide();
@@ -63,6 +63,7 @@ window.setMeUp = {
             }
         });
 
+        /*
         $.get(linkedInEndPoint + 'username/availability/' + username, function(data) {
             $('.linkedin-checking').hide();
 
@@ -74,6 +75,7 @@ window.setMeUp = {
                 console.log('linkedin is available');
             }
         });
+        */
     },
 };
 

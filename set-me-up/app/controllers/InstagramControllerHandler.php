@@ -6,7 +6,7 @@ class InstagramControllerHandler extends BaseController {
 	{
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
-		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
+		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
 		$driver = RemoteWebDriver::create($host, $capabilities, 5000);		
 		
 		// get webdriver
