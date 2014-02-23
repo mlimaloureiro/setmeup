@@ -135,10 +135,10 @@ class FacebookControllerHandler extends BaseController {
 		
 		sleep(10);
 
-		/* submit button */
+		// submit button 
 		$driver->findElement(WebDriverBy::id("u_0_i"))->click();
 		
-		/* wait till there's no login button anymore */
+		// wait till there's no login button anymore 
 		$driver->wait(80, 500)->until(function ($driver) {
 			try {
 				$driver->findElement(WebDriverBy::id('loginbutton'));
@@ -147,21 +147,21 @@ class FacebookControllerHandler extends BaseController {
 			}
 		});
 
-		/* go ahead to profile picture settings */
+		//go ahead to profile picture settings
 		try {
 			$driver->get('https://www.facebook.com/gettingstarted/?step=upload_profile_pic');
 			$driver->findElement(WebDriverBy::cssSelector("a.icon_link"))->click();
 
-			/* wait till we have the popup window to update */
+			// wait till we have the popup window to update 
 			$driver->wait(20, 500)->until(function ($driver) {
 			  return $driver->findElement(WebDriverBy::id('profile_picture_post_file'));
 			});
 			
-			/* select file */
+			// select file 
 			$inputFile = $driver->findElement(WebDriverBy::id('profile_picture_post_file'));
 			$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/pic.png');
 			
-			/* wait till the upload is made and the popup window disapear */
+			// wait till the upload is made and the popup window disapear
 			$driver->wait(300, 1000)->until(function ($driver) {
 				try {
 					$driver->findElement(WebDriverBy::id('pop_content'));
