@@ -36,6 +36,7 @@ class TwitterControllerHandler extends BaseController {
 
 	public function automateInput()
 	{
+		
 		$host = 'http://localhost:4444/wd/hub'; // this is the default
 		//$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'phantomjs');
 		$capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
@@ -54,8 +55,7 @@ class TwitterControllerHandler extends BaseController {
 		$birthday_year = Input::get('birthday_year');
 		$username = Input::get('username');
 		$sex = Input::get('sex');
-		$bio = Input::get('bio');
-		$website = Input::get('website');
+
 
 		$nameInput = $driver->findElement(WebDriverBy::cssSelector("input[name='user[name]']"));
 		$nameInput->sendKeys($firstName . ' ' . $lastName); 
@@ -68,8 +68,8 @@ class TwitterControllerHandler extends BaseController {
 
 		$usernameInput = $driver->findElement(WebDriverBy::cssSelector("input[name='user[screen_name]']"));
 		$usernameInput->sendKeys($username); 
-
-		/* wait till we have an username ok */
+		
+		// wait till we have an username ok 
 		$driver->wait(80, 300)->until(function ($driver) {
 			try {
 				$container = $driver->findElement(WebDriverBy::cssSelector("DIV.prompt.username"));
@@ -79,6 +79,7 @@ class TwitterControllerHandler extends BaseController {
 				;
 			}
 		});
+		
 
 		$driver->findElement(WebDriverBy::cssSelector("INPUT.submit.button.promotional"))->click();
 
@@ -86,41 +87,21 @@ class TwitterControllerHandler extends BaseController {
 			return $driver->getCurrentURL() != 'https://twitter.com/signup';
 		});
 		
-		/*
-		// LOGIN
-		$driver->get('https://twitter.com/');
 
-		$emailInput = $driver->findElement(WebDriverBy::id('signin-email'));
-		$emailInput->sendKeys('ana_cunha@mail.com');
-
-		$passwordInput = $driver->findElement(WebDriverBy::id('signin-password'));
-		$passwordInput->sendKeys('nova_p4ss');
-
-		$driver->findElement(WebDriverBy::cssSelector('BUTTON.submit.btn.primary-btn.flex-table-btn.js-submit'))->click();
-		
-		// wait till theres no submit button 
-		$driver->wait(80, 500)->until(function ($driver) {	
-			try 
-			{
-				$driver->findElement(WebDriverBy::cssSelector('BUTTON.submit.btn.primary-btn.flex-table-btn.js-submit'));
-			} catch (Exception $e) {
-				return true;
-			}	
-		});
-		*/
-
-		/* goes to profile settings */
+		// goes to profile settings
 		$driver->get('https://twitter.com/settings/profile');
 		
-		/* upload profile image */
+		sleep(10);
+
+		// upload profile image 
 		$driver->findElement(WebDriverBy::id("profile_image_upload"))->click();
 		$inputFile = $driver->findElement(WebDriverBy::cssSelector("INPUT.file-input"));
-		$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/me.png');
+		$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/pics/logo.png');
 		
 		$driver->findElement(WebDriverBy::cssSelector("BUTTON.btn.primary-btn.profile-image-save"))->click();
 		
-		/* test untill popup submit button disappears which means we have uploaded the picture*/ 
-		
+		// test untill popup submit button disappears which means we have uploaded the picture
+
 		$driver->wait(80, 500)->until(function ($driver) {	
 			try 
 			{
@@ -132,13 +113,14 @@ class TwitterControllerHandler extends BaseController {
 			}
 		});
 
-		/* insert cover picture */ 
+		// insert cover picture
 		$inputCoverFile = $driver->findElement(WebDriverBy::cssSelector("input[name='user[profile_header_image]'].file-input"));
-		$inputCoverFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/capa.png');
+		$inputCoverFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/pics/cover.jpg');
 		
 		$headerContainer = $driver->findElement(WebDriverBy::id("header_image_upload_dialog"));
 		$headerContainer->findElement(WebDriverBy::cssSelector("BUTTON.btn.primary-btn.profile-image-save"))->click();			
-				
-		echo "done";
+		
+		return Response::json(array('success' => false),200);
+
 	}
 }

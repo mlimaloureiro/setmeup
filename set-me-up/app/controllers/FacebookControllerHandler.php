@@ -42,8 +42,6 @@ class FacebookControllerHandler extends BaseController {
 
 	public function automateInput()
 	{
-		print_r(Input::get());
-
 		$firstName = Input::get('first_name');
 		$lastName = Input::get('last_name');
 		$email = Input::get('email');
@@ -88,18 +86,10 @@ class FacebookControllerHandler extends BaseController {
 	 	*/
 
 		// get webdriver
+		
 		$driver->get('https://www.facebook.com/');
 		
-		/* login
-		$emailInput = $driver->findElement(WebDriverBy::id("email"));
-		$emailInput->sendKeys("smup_cbr@outlook.pt");
 
-		$passInput = $driver->findElement(WebDriverBy::id("pass"));
-		$passInput->sendKeys("coisas_bonitas");
-		$driver->findElement(WebDriverBy::id("u_0_l"))->click();
-		*/
-	
-		/* type the necessary fields */ 
 		$nameInput = $driver->findElement(WebDriverBy::id("u_0_1"));
 		$nameInput->sendKeys($firstName); 
 		
@@ -159,7 +149,7 @@ class FacebookControllerHandler extends BaseController {
 			
 			// select file 
 			$inputFile = $driver->findElement(WebDriverBy::id('profile_picture_post_file'));
-			$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/pic.png');
+			$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/pics/logo.png');
 			
 			// wait till the upload is made and the popup window disapear
 			$driver->wait(300, 1000)->until(function ($driver) {
@@ -172,11 +162,13 @@ class FacebookControllerHandler extends BaseController {
 
 			$driver->findElement(WebDriverBy::id('nux_navigation_submit'))->click();
 
-			echo "ended";
+			return Response::json(array('success' => true),200);
 
 		} catch (Exception $e) {
-			echo "This is sparta!";
+			return Response::json(array('success' => false),400);
 		}
+		
+		return Response::json(array('success' => false),200);	
 	}
 
 
