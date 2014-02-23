@@ -99,6 +99,7 @@ class FacebookControllerHandler extends BaseController {
 		$driver->findElement(WebDriverBy::id("u_0_l"))->click();
 		*/
 	
+		/* type the necessary fields */ 
 		$nameInput = $driver->findElement(WebDriverBy::id("u_0_1"));
 		$nameInput->sendKeys($firstName); 
 		
@@ -132,8 +133,12 @@ class FacebookControllerHandler extends BaseController {
 			$driver->findElement(WebDriverBy::id("u_0_d"))->click();
 		}
 		
+		sleep(10);
+
+		/* submit button */
 		$driver->findElement(WebDriverBy::id("u_0_i"))->click();
 		
+		/* wait till there's no login button anymore */
 		$driver->wait(80, 500)->until(function ($driver) {
 			try {
 				$driver->findElement(WebDriverBy::id('loginbutton'));
@@ -142,34 +147,36 @@ class FacebookControllerHandler extends BaseController {
 			}
 		});
 
+		/* go ahead to profile picture settings */
 		try {
 			$driver->get('https://www.facebook.com/gettingstarted/?step=upload_profile_pic');
 			$driver->findElement(WebDriverBy::cssSelector("a.icon_link"))->click();
 
+			/* wait till we have the popup window to update */
 			$driver->wait(20, 500)->until(function ($driver) {
 			  return $driver->findElement(WebDriverBy::id('profile_picture_post_file'));
 			});
 			
+			/* select file */
 			$inputFile = $driver->findElement(WebDriverBy::id('profile_picture_post_file'));
 			$inputFile->setFileDetector(new LocalFileDetector())->sendKeys('/Users/miguel/opensource/img/pic.png');
 			
+			/* wait till the upload is made and the popup window disapear */
 			$driver->wait(300, 1000)->until(function ($driver) {
 				try {
 					$driver->findElement(WebDriverBy::id('pop_content'));
 				} catch (Exception $e) {
-					$driver->findElement(WebDriverBy::id('nux_navigation_submit'))->click();
 					return true;
 				}
 			});
 
-			echo "ok";
-			//$inputFile = $driver->findElement(WebDriverBy::id('nux_navigation_submit'))->click();
-			//$inputFile->sendKeys('/Users/miguel/opensource/img/me.png');
-		} catch (Exception $e) {
-			echo "ERRORRRRRRRR";
-		}
+			$driver->findElement(WebDriverBy::id('nux_navigation_submit'))->click();
 
-		echo "done";
+			echo "ended";
+
+		} catch (Exception $e) {
+			echo "This is sparta!";
+		}
 	}
 
 
