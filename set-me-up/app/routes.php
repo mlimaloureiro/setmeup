@@ -9,3 +9,4 @@ Route::get('/linkedin/username/availability/{username}', 'LinkedInControllerHand
 Route::get('/instagram/username/availability/{username}', 'InstagramControllerHandler@checkAvailability');
 
 Route::post('/facebook/automateInput/', 'FacebookControllerHandler@automateInput');
+Route::post('/twitter/automateInput/', 'TwitterControllerHandler@automateInput');
