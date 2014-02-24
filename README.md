@@ -15,7 +15,7 @@ Andrea Martins
 
 ##  What's done
 
-FacebookHandler and TwitterHandler, it's already registering in these social networks and adding a profile picute and cover photo.
+FacebookHandler and TwitterHandler, it's already registering in these social networks and adding a profile and cover photo.
 
 ## TODO
 
